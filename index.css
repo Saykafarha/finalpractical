@@ -1,0 +1,33 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#search-box {
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+#weather-container {
+    display: none;
+}
+
+#weather-icon {
+    max-width: 100px;
+    margin-bottom: 10px;
+}

@@ -1,38 +1,20 @@
 function searchWeather() {
-    const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
-    const searchBox = document.getElementById('search-box');
-    const locationElement = document.getElementById('location');
-    const temperatureElement = document.getElementById('temperature');
-    const descriptionElement = document.getElementById('description');
-    const iconElement = document.getElementById('weather-icon');
-    const windElement = document.getElementById('wind');
-    const humidityElement = document.getElementById('humidity');
-    const weatherContainer = document.getElementById('weather-container');
+    const apiKey = "7e117c9dbfd6f4c655d776e2ebb57512";
+    const searchInput = document.getElementById("searchInput").value;
 
-    const country = searchBox.value;
-
-    fetch(https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${apiKey}&units=metric)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('City not found');
-            }
-            return response.json();
-        })
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&appid=${apiKey}`)
+        .then(response => response.json())
         .then(data => {
-            locationElement.innerText = data.name + ', ' + data.sys.country;
-            temperatureElement.innerText = 'Temperature: ' + data.main.temp + '°C';
-            descriptionElement.innerText = 'Weather: ' + data.weather[0].description;
-            iconElement.src = getWeatherIcon(data.weather[0].icon);
-            windElement.innerText = 'Wind Speed: ' + data.wind.speed + ' m/s';
-            humidityElement.innerText = 'Humidity: ' + data.main.humidity + '%';
-            weatherContainer.style.display = 'block';
-        })
-        .catch(error => {
-            console.error('Error fetching weather data:', error);
-            alert('City not found. Please enter a valid city name.');
-        });
-}
+            const location = data.name + ", " + data.sys.country;
+            const temperature = Math.round(data.main.temp - 273.15) + "°C";
+            const description = data.weather[0].description;
+            const iconCode = data.weather[0].icon;
+            const iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
 
-function getWeatherIcon(iconCode) {
-    return https://openweathermap.org/img/wn/${iconCode}.png;
+            document.getElementById("location").innerText = location;
+            document.getElementById("temperature").innerText = temperature;
+            document.getElementById("description").innerText = description;
+            document.getElementById("weather-icon").src = iconUrl;
+        })
+        .catch(error => console.error("Error fetching data:", error));
 }
